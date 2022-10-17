@@ -18,9 +18,10 @@ const App = () => {
 
 
   // function to handle input
-  const addToText = (value) => {
+  const addToText = (val) => {
 
-      setText((text) => [...text, value + " "])
+      setText((text) => [...text, val + " "]);
+      
   }
 
   
@@ -28,9 +29,10 @@ const App = () => {
   //  // npm install mathjs for the math library
   // // then create a function to calculate results
   const calculateResult = () => { 
-    const inputX = text.join("")
+    const show = text.join(" ")
 
-    setResult(math.evaluate(inputX))
+    setResult(math.evaluate(show))
+   
   }
 
   // function to clear input
