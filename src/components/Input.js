@@ -1,12 +1,13 @@
 import React from 'react'
 import "./Input.css"
 
-const Input = ({text, result}) => {
+const Input = ({text, result, error}) => {
   return (
     <div className='input-wrapper'>
     
     <div className='result'>
-      <h1>{result}</h1>
+      <h1>{result}
+      {error}</h1>
     </div>
 
     <div className='text'>

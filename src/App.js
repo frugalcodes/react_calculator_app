@@ -3,12 +3,13 @@ import Button from "./components/Button";
 import Input from "./components/Input";
 import { useState } from "react";
 import React from "react";
-import * as math from "mathjs";
+import { evaluate } from "mathjs";
 
 const App = () => {
 
-  const [result, setResult] = useState("");
-  const [text, setText] = useState("");
+  const [result, setResult] = useState(" ");
+  const [text, setText] = useState(" ");
+  const [error, setError] = useState(" ");
 
  
    
@@ -18,9 +19,13 @@ const App = () => {
 
 
   // function to handle input
-  const addToText = (val) => {
+  const addToText = (value) => {
 
-      setText((text) => [...text, val + " "]);
+    if (value === "=") {
+       calculateResult()
+    } else {
+      setText(text + value)
+    }
       
   }
 
@@ -29,17 +34,19 @@ const App = () => {
   //  // npm install mathjs for the math library
   // // then create a function to calculate results
   const calculateResult = () => { 
-    const show = text.join(" ")
+    try {
+      const showresult = evaluate(text)
 
-    setResult(math.evaluate(show))
-   
+    setResult(showresult)
+    } catch (error) { setError("error") }
   }
 
   // function to clear input
 
   const resetInput = () => { 
     setText("")
-    setResult("")
+    setResult(" ")
+    setError(" ")
   }
 
 
@@ -48,7 +55,7 @@ const App = () => {
 
 
     <div className="calc-wrapper">
-    <Input text={text} result={result}/>
+    <Input text={text} result={result} error={error}/>
     <div className="row">
     <Button  symbol="7" handleClick={addToText}/>
     <Button symbol="8" handleClick={addToText}/>
